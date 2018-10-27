@@ -10,9 +10,11 @@ namespace gk1_lab2
     {
         Vertex[] vertices = new Vertex[3];
 
-        public Triangle(Vertex[] vertices)
+        public Triangle(Vertex v1, Vertex v2, Vertex v3)
         {
-            Vertices = vertices;
+            Vertices[0] = v1;
+            Vertices[1] = v2;
+            Vertices[2] = v3;
         }
 
         internal Vertex[] Vertices { get => vertices; set => vertices = value; }
