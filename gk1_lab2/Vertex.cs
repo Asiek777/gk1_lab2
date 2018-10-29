@@ -16,8 +16,8 @@ namespace gk1_lab2
             Y = y;
         }
 
-        public static double calcDistance(Vertex v1, Vertex v2)
-            => Math.Sqrt((double)((v1.X - v2.X) * (v1.X - v2.X) + (v1.Y - v2.Y) * (v1.Y - v2.Y)));
+        public double calcDistance(int x2, int y2)
+            => Math.Sqrt((double)((x - x2) * (x - x2) + (y - y2) * (y - y2)));
 
         public int X { get => x; set => x = value; }
         public int Y { get => y; set => y = value; }

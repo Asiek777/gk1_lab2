@@ -52,5 +52,32 @@ namespace gk1_lab2
                                 v.Y - pointSize, 2 * pointSize, 2 * pointSize);
             e.Graphics.FillEllipse(Brushes.Black, circle);
         }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Vertex v = (s.getVertices().OrderBy(vert => vert.calcDistance(e.X, e.Y)).First());
+            if (v.calcDistance(e.X, e.Y) < 7)
+            {
+                s.MovedVertex = v;
+                s.PosX = e.X;
+                s.PosY = e.Y;
+                pictureBox1.MouseMove += moveVertex;
+            }
+        }
+
+        private void moveVertex(object sender, MouseEventArgs e)
+        {
+            Vertex v = s.MovedVertex;
+            v.X += e.X - s.PosX;
+            v.Y += e.Y - s.PosY;
+            pictureBox1.Refresh();
+            s.PosX = e.X;
+            s.PosY = e.Y;
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            pictureBox1.MouseMove -= moveVertex;
+        }
     }
 }

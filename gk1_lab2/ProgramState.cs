@@ -10,9 +10,14 @@ namespace gk1_lab2
     {
         private Triangle triangle1;
         private Triangle triangle2;
+        int posX, posY;
+        Vertex movedVertex;
 
+        public int PosX { get => posX; set => posX = value; }
+        public int PosY { get => posY; set => posY = value; }
         internal Triangle Triangle2 { get => triangle2; set => triangle2 = value; }
         internal Triangle Triangle1 { get => triangle1; set => triangle1 = value; }
+        internal Vertex MovedVertex { get => movedVertex; set => movedVertex = value; }
 
         internal void setDefaultTriangles()
         {
@@ -26,7 +31,8 @@ namespace gk1_lab2
                  new Vertex(400, 400),
                  new Vertex(300, 200)
             );
-
         }
+        internal IEnumerable<Vertex> getVertices() => 
+            Triangle1.Vertices.Concat(Triangle2.Vertices);
     }
 }
