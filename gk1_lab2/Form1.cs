@@ -86,8 +86,15 @@ namespace gk1_lab2
 
         private void drawLine(int y, int x1, int x2)
         {
-            for (int i = x1; i <= x2; i++)
-                bitmap.SetPixel(i, y, Color.Red);
+            if (y > 0 && y < pictureBox1.Height)
+            {
+                if (x1 < 0)
+                    x1 = 0;
+                if (x2 >= pictureBox1.Width)
+                    x2 = pictureBox1.Width - 1;
+                for (int i = x1; i <= x2; i++)
+                    bitmap.SetPixel(i, y, Color.Red);
+            }
         }
 
         private static void drawLine(PaintEventArgs e,  Vertex v1, Vertex v2)
