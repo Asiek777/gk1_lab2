@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,14 @@ namespace gk1_lab2
         private Triangle triangle2;
         int posX, posY;
         Vertex movedVertex;
+        Lamp lamp = new Lamp(Color.White, new vec3(500, 400, 100));
 
         public int PosX { get => posX; set => posX = value; }
         public int PosY { get => posY; set => posY = value; }
         internal Triangle Triangle2 { get => triangle2; set => triangle2 = value; }
         internal Triangle Triangle1 { get => triangle1; set => triangle1 = value; }
         internal Vertex MovedVertex { get => movedVertex; set => movedVertex = value; }
+        internal Lamp Lamp { get => lamp; set => lamp = value; }
 
         internal void setDefaultTriangles()
         {

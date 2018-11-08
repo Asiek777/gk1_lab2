@@ -28,10 +28,11 @@ namespace gk1_lab2
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            bitmap = (Bitmap) pictureBox1.Image;
-            Graphics.FromImage(bitmap).Clear(pictureBox1.BackColor);
+            bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            //Graphics.FromImage(bitmap).Clear(pictureBox1.BackColor);
             drawTriangle(e, s.Triangle1);
             drawTriangle(e, s.Triangle2);
+            pictureBox1.Image = bitmap;
 
         }
 
@@ -93,8 +94,22 @@ namespace gk1_lab2
                 if (x2 >= pictureBox1.Width)
                     x2 = pictureBox1.Width - 1;
                 for (int i = x1; i <= x2; i++)
-                    bitmap.SetPixel(i, y, Color.Red);
+                    drawPixel(y, i);
             }
+        }
+
+        private void drawPixel(int y, int i)
+        {
+            vec3 pix = new vec3(Color.Red); //pixel Color to change later
+            vec3 toLight = s.Lamp.normalizedVectorFrom(i, y);
+            double cosToLight = toLight * new vec3(0, 0, 1); //to change on normal vector
+            vec3 colorVec3 = new vec3(
+                s.Lamp.Color.x * pix.x * cosToLight,
+                s.Lamp.Color.y * pix.y * cosToLight,
+                s.Lamp.Color.z * pix.z * cosToLight);
+            Color color = Color.FromArgb(colorVec3.toARGB());
+
+            bitmap.SetPixel(i, y, color);
         }
 
         private static void drawLine(PaintEventArgs e,  Vertex v1, Vertex v2)
