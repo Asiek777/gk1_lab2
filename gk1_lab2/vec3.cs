@@ -37,8 +37,8 @@ namespace gk1_lab2
         }
         public int toARGB()
         {
-            if (x > 1 || y > 1 || z > 1)
-                throw new InvalidOperationException("It's not a color Vector");
+            //if (x > 1 || y > 1 || z > 1)
+            //    throw new InvalidOperationException("It's not a color Vector");
             return ((byte)(x * 255)) << 16 | ((byte)(y * 255)) << 8 
                 | ((byte)(z * 255)) | 255 << 24;
         }
@@ -48,5 +48,8 @@ namespace gk1_lab2
             new vec3(v.x * a, v.y * a, v.z * a);
         public static vec3 operator *(double a, vec3 v) =>
             new vec3(v.x * a, v.y * a, v.z * a);
+
+        public static implicit operator vec3(Color color) => 
+            new vec3(color);
     }
 }

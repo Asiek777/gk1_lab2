@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,16 @@ namespace gk1_lab2
     {
         const int pointSize = 5;
         Bitmap bitmap;
-        ProgramState s = new ProgramState();
+        BitmapData bmpData;
+        byte[] rgbValues;
+        ProgramState s;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            s = new ProgramState(this);
+            pictureBox1.BackColor = Color.Gray;
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             s.setDefaultTriangles();
@@ -29,12 +35,26 @@ namespace gk1_lab2
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            //Graphics.FromImage(bitmap).Clear(pictureBox1.BackColor);
+            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            System.Drawing.Imaging.BitmapData bmpData =
+                bitmap.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite,
+                bitmap.PixelFormat);
+            IntPtr ptr = bmpData.Scan0;
+            int bytes = Math.Abs(bmpData.Stride) * bitmap.Height;
+            rgbValues = new byte[bytes];
+            for (int counter = 2; counter < rgbValues.Length; counter += 3)
+                rgbValues[counter] = 255;
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+            fillTriangle(s.Triangle1.Vertices);
+            fillTriangle(s.Triangle2.Vertices);
+            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
+            bitmap.UnlockBits(bmpData);
+            e.Graphics.DrawImage(bitmap, 0, 0);
             drawTriangle(e, s.Triangle1);
             drawTriangle(e, s.Triangle2);
-            pictureBox1.Image = bitmap;
-
         }
+
 
         private void drawTriangle(PaintEventArgs e, Triangle t)
         {
@@ -100,7 +120,7 @@ namespace gk1_lab2
 
         private void drawPixel(int y, int i)
         {
-            vec3 pix = new vec3(Color.Red); //pixel Color to change later
+            vec3 pix = new vec3(Color.White); //pixel Color to change later
             vec3 toLight = s.Lamp.normalizedVectorFrom(i, y);
             double cosToLight = toLight * new vec3(0, 0, 1); //to change on normal vector
             vec3 colorVec3 = new vec3(
@@ -109,7 +129,17 @@ namespace gk1_lab2
                 s.Lamp.Color.z * pix.z * cosToLight);
             Color color = Color.FromArgb(colorVec3.toARGB());
 
-            bitmap.SetPixel(i, y, color);
+            //bitmap.SetPixel(i, y, color);
+            putPixel(i, y, color);
+        }
+
+        private void putPixel(int x, int y, Color color)
+        {
+            int ind = 4*(bitmap.Width * y + x);
+            rgbValues[ind] = color.R;
+            rgbValues[ind + 1] = color.G;
+            rgbValues[ind + 2] = color.B;
+            rgbValues[ind + 3] = 255;
         }
 
         private static void drawLine(PaintEventArgs e,  Vertex v1, Vertex v2)
@@ -150,6 +180,17 @@ namespace gk1_lab2
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             pictureBox1.MouseMove -= moveVertex;
+        }
+        
+        private void lightColorBut_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            DialogResult result = colorDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                s.LightColor = colorDialog.Color;
+            }
+            pictureBox1.Refresh();
         }
     }
 }

@@ -9,11 +9,18 @@ namespace gk1_lab2
 {
     class ProgramState
     {
+        private MainWindow parent;
         private Triangle triangle1;
         private Triangle triangle2;
         int posX, posY;
         Vertex movedVertex;
         Lamp lamp = new Lamp(Color.White, new vec3(500, 400, 100));
+        Bitmap bumpBitmap;
+
+        public ProgramState(MainWindow parent)
+        {
+            this.parent = parent;
+        }
 
         public int PosX { get => posX; set => posX = value; }
         public int PosY { get => posY; set => posY = value; }
@@ -21,6 +28,12 @@ namespace gk1_lab2
         internal Triangle Triangle1 { get => triangle1; set => triangle1 = value; }
         internal Vertex MovedVertex { get => movedVertex; set => movedVertex = value; }
         internal Lamp Lamp { get => lamp; set => lamp = value; }
+        public Bitmap BumpBitmap { get => bumpBitmap; set => bumpBitmap = value; }
+        internal Color LightColor { get => parent.lightColorBox.BackColor; set 
+                {
+                Lamp.Color = value;
+                parent.lightColorBox.BackColor = value;
+            } }
 
         internal void setDefaultTriangles()
         {
