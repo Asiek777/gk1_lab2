@@ -65,7 +65,8 @@ namespace gk1_lab2
             TexturePixels = new vec3[parent.pictureBox1.Width, parent.pictureBox1.Height];
             BumpMapPixels = new vec3[parent.pictureBox1.Width, parent.pictureBox1.Height];
             setDefaultTriangles();
-           // BumpMap = new Bitmap("brick_normalmap.bmp");
+            BumpMap = new Bitmap("brick_normalmap.png");
+            Texture = new Bitmap("texture.bmp");
         }
         internal void setDefaultTriangles()
         {
