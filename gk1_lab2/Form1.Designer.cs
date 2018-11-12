@@ -51,6 +51,11 @@
             this.constLightRadioButton = new System.Windows.Forms.RadioButton();
             this.circleLightRadioButton = new System.Windows.Forms.RadioButton();
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.disturbanceGroupBox = new System.Windows.Forms.GroupBox();
+            this.disturbanceButton = new System.Windows.Forms.Button();
+            this.disturbancePictureBox = new System.Windows.Forms.PictureBox();
+            this.disturbanceRadioBut = new System.Windows.Forms.RadioButton();
+            this.noDisturbanceRadioBut = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.bumpGroupBox.SuspendLayout();
@@ -61,6 +66,8 @@
             this.Light.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.disturbanceGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.disturbancePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -81,6 +88,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Menu;
+            this.panel1.Controls.Add(this.disturbanceGroupBox);
             this.panel1.Controls.Add(this.bumpGroupBox);
             this.panel1.Controls.Add(this.textureGroupBox);
             this.panel1.Controls.Add(this.Light);
@@ -96,9 +104,9 @@
             this.bumpGroupBox.Controls.Add(this.bumpMapPictureBox);
             this.bumpGroupBox.Controls.Add(this.bumpMapRadioBut);
             this.bumpGroupBox.Controls.Add(this.constVectorRadioBut);
-            this.bumpGroupBox.Location = new System.Drawing.Point(12, 408);
+            this.bumpGroupBox.Location = new System.Drawing.Point(12, 360);
             this.bumpGroupBox.Name = "bumpGroupBox";
-            this.bumpGroupBox.Size = new System.Drawing.Size(187, 148);
+            this.bumpGroupBox.Size = new System.Drawing.Size(187, 134);
             this.bumpGroupBox.TabIndex = 2;
             this.bumpGroupBox.TabStop = false;
             this.bumpGroupBox.Text = "Bump Mapping";
@@ -151,9 +159,9 @@
             this.textureGroupBox.Controls.Add(this.constColorPictureBox);
             this.textureGroupBox.Controls.Add(this.textureRadioButton);
             this.textureGroupBox.Controls.Add(this.colorRadioButton);
-            this.textureGroupBox.Location = new System.Drawing.Point(12, 229);
+            this.textureGroupBox.Location = new System.Drawing.Point(12, 199);
             this.textureGroupBox.Name = "textureGroupBox";
-            this.textureGroupBox.Size = new System.Drawing.Size(187, 173);
+            this.textureGroupBox.Size = new System.Drawing.Size(187, 155);
             this.textureGroupBox.TabIndex = 1;
             this.textureGroupBox.TabStop = false;
             this.textureGroupBox.Text = "Texture";
@@ -225,7 +233,7 @@
             this.Light.Controls.Add(this.label1);
             this.Light.Location = new System.Drawing.Point(12, 9);
             this.Light.Name = "Light";
-            this.Light.Size = new System.Drawing.Size(187, 214);
+            this.Light.Size = new System.Drawing.Size(187, 184);
             this.Light.TabIndex = 0;
             this.Light.TabStop = false;
             this.Light.Text = "Light";
@@ -297,6 +305,58 @@
             this.refreshTimer.Enabled = true;
             this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
             // 
+            // disturbanceGroupBox
+            // 
+            this.disturbanceGroupBox.Controls.Add(this.noDisturbanceRadioBut);
+            this.disturbanceGroupBox.Controls.Add(this.disturbanceButton);
+            this.disturbanceGroupBox.Controls.Add(this.disturbancePictureBox);
+            this.disturbanceGroupBox.Controls.Add(this.disturbanceRadioBut);
+            this.disturbanceGroupBox.Location = new System.Drawing.Point(12, 500);
+            this.disturbanceGroupBox.Name = "disturbanceGroupBox";
+            this.disturbanceGroupBox.Size = new System.Drawing.Size(187, 139);
+            this.disturbanceGroupBox.TabIndex = 7;
+            this.disturbanceGroupBox.TabStop = false;
+            this.disturbanceGroupBox.Text = "Bump Mapping";
+            // 
+            // disturbanceButton
+            // 
+            this.disturbanceButton.Location = new System.Drawing.Point(128, 72);
+            this.disturbanceButton.Name = "disturbanceButton";
+            this.disturbanceButton.Size = new System.Drawing.Size(54, 38);
+            this.disturbanceButton.TabIndex = 6;
+            this.disturbanceButton.Text = "Set";
+            this.disturbanceButton.UseVisualStyleBackColor = true;
+            // 
+            // disturbancePictureBox
+            // 
+            this.disturbancePictureBox.Location = new System.Drawing.Point(83, 73);
+            this.disturbancePictureBox.Name = "disturbancePictureBox";
+            this.disturbancePictureBox.Size = new System.Drawing.Size(38, 37);
+            this.disturbancePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.disturbancePictureBox.TabIndex = 6;
+            this.disturbancePictureBox.TabStop = false;
+            // 
+            // disturbanceRadioBut
+            // 
+            this.disturbanceRadioBut.Location = new System.Drawing.Point(6, 73);
+            this.disturbanceRadioBut.Name = "disturbanceRadioBut";
+            this.disturbanceRadioBut.Size = new System.Drawing.Size(85, 38);
+            this.disturbanceRadioBut.TabIndex = 2;
+            this.disturbanceRadioBut.Text = "Disturbance Map";
+            this.disturbanceRadioBut.UseVisualStyleBackColor = true;
+            // 
+            // noDisturbanceRadioBut
+            // 
+            this.noDisturbanceRadioBut.Checked = true;
+            this.noDisturbanceRadioBut.Location = new System.Drawing.Point(9, 29);
+            this.noDisturbanceRadioBut.Name = "noDisturbanceRadioBut";
+            this.noDisturbanceRadioBut.Size = new System.Drawing.Size(94, 38);
+            this.noDisturbanceRadioBut.TabIndex = 7;
+            this.noDisturbanceRadioBut.TabStop = true;
+            this.noDisturbanceRadioBut.Text = "No Disturbance";
+            this.noDisturbanceRadioBut.UseVisualStyleBackColor = true;
+            this.noDisturbanceRadioBut.CheckedChanged += new System.EventHandler(this.noDisturbanceRadioBut_CheckedChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,6 +378,8 @@
             this.Light.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lightColorBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.disturbanceGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.disturbancePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,6 +408,11 @@
         private System.Windows.Forms.RadioButton circleLightRadioButton;
         private System.Windows.Forms.RadioButton constLightRadioButton;
         private System.Windows.Forms.Timer refreshTimer;
+        private System.Windows.Forms.GroupBox disturbanceGroupBox;
+        private System.Windows.Forms.RadioButton noDisturbanceRadioBut;
+        private System.Windows.Forms.Button disturbanceButton;
+        internal System.Windows.Forms.PictureBox disturbancePictureBox;
+        private System.Windows.Forms.RadioButton disturbanceRadioBut;
     }
 }
 

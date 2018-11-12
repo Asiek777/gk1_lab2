@@ -12,7 +12,7 @@ namespace gk1_lab2
         private MainWindow parent;
         Lamp lamp = new Lamp(Color.White, new vec3(500, 400, 100));
         private vec3 textureColor;
-        Bitmap texture, bumpMap;
+        Bitmap texture, bumpMap, disturbMap;
 
 
         public int PosX { get; set; }
@@ -37,6 +37,12 @@ namespace gk1_lab2
                 fillTexturePixels(value);
             } }
 
+        public Bitmap DisturbMap { get => disturbMap; set
+            { 
+               disturbMap = value;
+                parent.disturbancePictureBox.Image = value;
+            } }
+
         internal Color LightColor { get => parent.lightColorBox.BackColor; set 
                 {
                 Lamp.Color = value;
@@ -51,7 +57,9 @@ namespace gk1_lab2
 
         internal vec3[,] TexturePixels { get; set; }
         internal vec3[,] BumpMapPixels { get; set; }
+        internal vec3[,] DisturbancePixels { get; set; }
         internal bool IsLightConst { get => Lamp.IsConst; set => Lamp.IsConst = value; }
+
 
         internal IEnumerable<Vertex> getVertices() => 
             Triangle1.Vertices.Concat(Triangle2.Vertices);
@@ -64,9 +72,11 @@ namespace gk1_lab2
             TextureColor = Color.White;
             TexturePixels = new vec3[parent.pictureBox1.Width, parent.pictureBox1.Height];
             BumpMapPixels = new vec3[parent.pictureBox1.Width, parent.pictureBox1.Height];
+            DisturbancePixels = new vec3[parent.pictureBox1.Width, parent.pictureBox1.Height];
             setDefaultTriangles();
             BumpMap = new Bitmap("brick_normalmap.png");
             Texture = new Bitmap("texture.bmp");
+            DisturbMap = new Bitmap("brick_heightmap.png");
         }
         internal void setDefaultTriangles()
         {

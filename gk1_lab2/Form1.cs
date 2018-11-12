@@ -265,5 +265,8 @@ namespace gk1_lab2
             s.Lamp.calcLocation(s.Time);
             pictureBox1.Refresh();
         }
+
+        private void noDisturbanceRadioBut_CheckedChanged(object sender, EventArgs e) => 
+            pictureBox1.Refresh();
     }
 }
