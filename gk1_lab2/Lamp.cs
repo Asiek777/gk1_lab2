@@ -16,12 +16,19 @@ namespace gk1_lab2
         {
             Color = new vec3(color);
             Location = location;
+            IsConst = false;
         }
 
         public vec3 Color { get => color; set => color = value; }
+        public bool IsConst { get; set; }
         internal vec3 Location { get => loc; set => loc = value; }
-        internal vec3 normalizedVectorFrom(double x, double y) => 
-            new vec3(loc.x - x, loc.y - y, loc.z, true);
+        internal vec3 normalizedVectorFrom(double x, double y)
+        {
+            if (IsConst)
+                return new vec3(0, 0, 1);
+            else
+                return new vec3(loc.x - x, loc.y - y, loc.z, true);
+        }
 
     }
 }

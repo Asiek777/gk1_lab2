@@ -26,8 +26,6 @@ namespace gk1_lab2
             s = new ProgramState(this);
             pictureBox1.BackColor = Color.Gray;
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-
-            s.setDefaultTriangles();
         }
 
 
@@ -36,7 +34,7 @@ namespace gk1_lab2
         {
             bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-            System.Drawing.Imaging.BitmapData bmpData =
+            bmpData =
                 bitmap.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite,
                 bitmap.PixelFormat);
             IntPtr ptr = bmpData.Scan0;
@@ -63,7 +61,6 @@ namespace gk1_lab2
                 drawVertex(e, t.Vertices[i]);
                 drawLine(e, t.Vertices[i], t.Vertices[(i + 1) % 3]);
             }
-            fillTriangle(t.Vertices);
         }
 
         private void fillTriangle(Vertex[] vertices)
@@ -114,15 +111,16 @@ namespace gk1_lab2
                 if (x2 >= pictureBox1.Width)
                     x2 = pictureBox1.Width - 1;
                 for (int i = x1; i <= x2; i++)
-                    drawPixel(y, i);
+                    drawPixel(i, y);
+                //Parallel.For(x1, x2 + 1, i => drawPixel(i, y));
             }
         }
 
-        private void drawPixel(int y, int i)
+        private void drawPixel(int x, int y)
         {
-            vec3 pix = new vec3(Color.White); //pixel Color to change later
-            vec3 toLight = s.Lamp.normalizedVectorFrom(i, y);
-            double cosToLight = toLight * new vec3(0, 0, 1); //to change on normal vector
+            vec3 pix = GetPixelTextureColor(x, y);
+            vec3 toLight = s.Lamp.normalizedVectorFrom(x, y);
+            double cosToLight = toLight * bumpMapVector(x, y);
             vec3 colorVec3 = new vec3(
                 s.Lamp.Color.x * pix.x * cosToLight,
                 s.Lamp.Color.y * pix.y * cosToLight,
@@ -130,15 +128,31 @@ namespace gk1_lab2
             Color color = Color.FromArgb(colorVec3.toARGB());
 
             //bitmap.SetPixel(i, y, color);
-            putPixel(i, y, color);
+            putPixel(x, y, color);
+        }
+
+        private vec3 bumpMapVector(int x, int y)
+        {
+            if (constVectorRadioBut.Checked)
+                return new vec3(0, 0, 1);
+            else
+                return s.BumpMapPixels[x, y];
+        }
+
+        private vec3 GetPixelTextureColor(int x, int y)
+        {
+            if (colorRadioButton.Checked)
+                return s.TextureColor;
+            else
+                return s.TexturePixels[x, y];
         }
 
         private void putPixel(int x, int y, Color color)
         {
             int ind = 4*(bitmap.Width * y + x);
-            rgbValues[ind] = color.R;
+            rgbValues[ind] = color.B;
             rgbValues[ind + 1] = color.G;
-            rgbValues[ind + 2] = color.B;
+            rgbValues[ind + 2] = color.R;
             rgbValues[ind + 3] = 255;
         }
 
@@ -180,16 +194,66 @@ namespace gk1_lab2
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             pictureBox1.MouseMove -= moveVertex;
+            Vertex v = s.MovedVertex;
+            if (s.PosX > pictureBox1.Width)
+                s.PosX = pictureBox1.Width - 1;
+            if (s.PosY < pictureBox1.Height)
+                s.PosY = pictureBox1.Height - 1;
+            if (s.PosX < 0)
+                s.PosX = 0;
+            if (s.PosY < 0)
+                s.PosY = 0;
         }
         
         private void lightColorBut_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
-            DialogResult result = colorDialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
                 s.LightColor = colorDialog.Color;
+            pictureBox1.Refresh();
+        }
+
+        private void colorRadioButton_CheckedChanged(object sender, EventArgs e) => 
+            pictureBox1.Refresh();
+
+        private void constColorBut_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+                s.TextureColor = colorDialog.Color;
+            pictureBox1.Refresh();
+        }
+
+        private void textureButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Open Image";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                s.Texture = new Bitmap(dlg.FileName);
             }
+            pictureBox1.Refresh();
+        }
+
+        private void bumpMapBut_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Open Image";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                s.BumpMap = new Bitmap(dlg.FileName);
+            }
+            pictureBox1.Refresh();
+        }
+
+        private void constVectorRadioBut_CheckedChanged(object sender, EventArgs e) => 
+            pictureBox1.Refresh();
+
+        private void constLightRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            s.IsLightConst = constLightRadioButton.Checked;
             pictureBox1.Refresh();
         }
     }

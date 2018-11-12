@@ -35,6 +35,12 @@ namespace gk1_lab2
             y /= len;
             z /= len;
         }
+        internal void convertToBumpMap()
+        {
+            x = x * 2 - 1;
+            y = y * 2 - 1;
+            normalizeVector();
+        }
         public int toARGB()
         {
             //if (x > 1 || y > 1 || z > 1)
@@ -42,6 +48,8 @@ namespace gk1_lab2
             return ((byte)(x * 255)) << 16 | ((byte)(y * 255)) << 8 
                 | ((byte)(z * 255)) | 255 << 24;
         }
+
+
         public static double operator *(vec3 v1, vec3 v2) => 
             v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
         public static vec3 operator *(vec3 v, double a) =>
