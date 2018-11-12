@@ -112,7 +112,8 @@ namespace gk1_lab2
                     x2 = pictureBox1.Width - 1;
                 for (int i = x1; i <= x2; i++)
                     drawPixel(i, y);
-                //Parallel.For(x1, x2 + 1, i => drawPixel(i, y));
+                //try { Parallel.For(x1, x2 + 1, i => drawPixel(i, y)); }
+                //catch (Exception e) { Console.WriteLine(e.Message); };
             }
         }
 
@@ -195,14 +196,15 @@ namespace gk1_lab2
         {
             pictureBox1.MouseMove -= moveVertex;
             Vertex v = s.MovedVertex;
-            if (s.PosX > pictureBox1.Width)
-                s.PosX = pictureBox1.Width - 1;
-            if (s.PosY < pictureBox1.Height)
-                s.PosY = pictureBox1.Height - 1;
-            if (s.PosX < 0)
-                s.PosX = 0;
-            if (s.PosY < 0)
-                s.PosY = 0;
+            if (v.X > pictureBox1.Width)
+                v.X = pictureBox1.Width - 1;
+            if (v.Y > pictureBox1.Height)
+                v.Y = pictureBox1.Height - 1;
+            if (v.X < 0)
+                v.X = 0;
+            if (v.Y < 0)
+                v.Y = 0;
+            pictureBox1.Refresh();
         }
         
         private void lightColorBut_Click(object sender, EventArgs e)
@@ -254,6 +256,13 @@ namespace gk1_lab2
         private void constLightRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             s.IsLightConst = constLightRadioButton.Checked;
+            pictureBox1.Refresh();
+        }
+
+        private void refreshTimer_Tick(object sender, EventArgs e)
+        {
+            s.Time += 0.1;
+            s.Lamp.calcLocation(s.Time);
             pictureBox1.Refresh();
         }
     }

@@ -30,5 +30,11 @@ namespace gk1_lab2
                 return new vec3(loc.x - x, loc.y - y, loc.z, true);
         }
 
+        internal void calcLocation(double t)
+        {
+            loc.x = 422 + (int)(Math.Cos(t) * 200);
+            loc.y = 383 + (int)(Math.Sin(t) * 200);
+        }
+
     }
 }

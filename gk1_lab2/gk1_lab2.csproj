@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="brick_normalmap.png" />
+    <Content Include="texture.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

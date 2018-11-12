@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bumpGroupBox = new System.Windows.Forms.GroupBox();
@@ -49,6 +50,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.constLightRadioButton = new System.Windows.Forms.RadioButton();
             this.circleLightRadioButton = new System.Windows.Forms.RadioButton();
+            this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.bumpGroupBox.SuspendLayout();
@@ -290,6 +292,11 @@
             this.circleLightRadioButton.Text = "Light on the circle of radius 200";
             this.circleLightRadioButton.UseVisualStyleBackColor = true;
             // 
+            // refreshTimer
+            // 
+            this.refreshTimer.Enabled = true;
+            this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,6 +345,7 @@
         private System.Windows.Forms.RadioButton constVectorRadioBut;
         private System.Windows.Forms.RadioButton circleLightRadioButton;
         private System.Windows.Forms.RadioButton constLightRadioButton;
+        private System.Windows.Forms.Timer refreshTimer;
     }
 }
 

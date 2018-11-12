@@ -17,6 +17,7 @@ namespace gk1_lab2
 
         public int PosX { get; set; }
         public int PosY { get; set; }
+        public double Time { get; set; }
         internal Triangle Triangle2 { get; set; }
         internal Triangle Triangle1 { get; set; }
         internal Vertex MovedVertex { get; set; }
@@ -64,6 +65,7 @@ namespace gk1_lab2
             TexturePixels = new vec3[parent.pictureBox1.Width, parent.pictureBox1.Height];
             BumpMapPixels = new vec3[parent.pictureBox1.Width, parent.pictureBox1.Height];
             setDefaultTriangles();
+           // BumpMap = new Bitmap("brick_normalmap.bmp");
         }
         internal void setDefaultTriangles()
         {
