@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.disturbanceGroupBox = new System.Windows.Forms.GroupBox();
+            this.noDisturbanceRadioBut = new System.Windows.Forms.RadioButton();
+            this.disturbanceButton = new System.Windows.Forms.Button();
+            this.disturbancePictureBox = new System.Windows.Forms.PictureBox();
+            this.disturbanceRadioBut = new System.Windows.Forms.RadioButton();
             this.bumpGroupBox = new System.Windows.Forms.GroupBox();
             this.bumpMapBut = new System.Windows.Forms.Button();
             this.bumpMapPictureBox = new System.Windows.Forms.PictureBox();
@@ -44,20 +49,22 @@
             this.textureRadioButton = new System.Windows.Forms.RadioButton();
             this.colorRadioButton = new System.Windows.Forms.RadioButton();
             this.Light = new System.Windows.Forms.GroupBox();
+            this.circleLightRadioButton = new System.Windows.Forms.RadioButton();
+            this.constLightRadioButton = new System.Windows.Forms.RadioButton();
             this.lightColorBut = new System.Windows.Forms.Button();
             this.lightColorBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.constLightRadioButton = new System.Windows.Forms.RadioButton();
-            this.circleLightRadioButton = new System.Windows.Forms.RadioButton();
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.disturbanceGroupBox = new System.Windows.Forms.GroupBox();
-            this.disturbanceButton = new System.Windows.Forms.Button();
-            this.disturbancePictureBox = new System.Windows.Forms.PictureBox();
-            this.disturbanceRadioBut = new System.Windows.Forms.RadioButton();
-            this.noDisturbanceRadioBut = new System.Windows.Forms.RadioButton();
+            this.phongTrackBar = new System.Windows.Forms.TrackBar();
+            this.lambertTrackBar = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.mPhongTrackBar = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.disturbanceGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.disturbancePictureBox)).BeginInit();
             this.bumpGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bumpMapPictureBox)).BeginInit();
             this.textureGroupBox.SuspendLayout();
@@ -66,8 +73,9 @@
             this.Light.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.disturbanceGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.disturbancePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phongTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lambertTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mPhongTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -98,15 +106,67 @@
             this.panel1.Size = new System.Drawing.Size(208, 766);
             this.panel1.TabIndex = 0;
             // 
+            // disturbanceGroupBox
+            // 
+            this.disturbanceGroupBox.Controls.Add(this.noDisturbanceRadioBut);
+            this.disturbanceGroupBox.Controls.Add(this.disturbanceButton);
+            this.disturbanceGroupBox.Controls.Add(this.disturbancePictureBox);
+            this.disturbanceGroupBox.Controls.Add(this.disturbanceRadioBut);
+            this.disturbanceGroupBox.Location = new System.Drawing.Point(12, 641);
+            this.disturbanceGroupBox.Name = "disturbanceGroupBox";
+            this.disturbanceGroupBox.Size = new System.Drawing.Size(187, 122);
+            this.disturbanceGroupBox.TabIndex = 7;
+            this.disturbanceGroupBox.TabStop = false;
+            this.disturbanceGroupBox.Text = "Bump Mapping";
+            // 
+            // noDisturbanceRadioBut
+            // 
+            this.noDisturbanceRadioBut.Checked = true;
+            this.noDisturbanceRadioBut.Location = new System.Drawing.Point(9, 29);
+            this.noDisturbanceRadioBut.Name = "noDisturbanceRadioBut";
+            this.noDisturbanceRadioBut.Size = new System.Drawing.Size(94, 38);
+            this.noDisturbanceRadioBut.TabIndex = 7;
+            this.noDisturbanceRadioBut.TabStop = true;
+            this.noDisturbanceRadioBut.Text = "No Disturbance";
+            this.noDisturbanceRadioBut.UseVisualStyleBackColor = true;
+            this.noDisturbanceRadioBut.CheckedChanged += new System.EventHandler(this.noDisturbanceRadioBut_CheckedChanged);
+            // 
+            // disturbanceButton
+            // 
+            this.disturbanceButton.Location = new System.Drawing.Point(128, 72);
+            this.disturbanceButton.Name = "disturbanceButton";
+            this.disturbanceButton.Size = new System.Drawing.Size(54, 38);
+            this.disturbanceButton.TabIndex = 6;
+            this.disturbanceButton.Text = "Set";
+            this.disturbanceButton.UseVisualStyleBackColor = true;
+            // 
+            // disturbancePictureBox
+            // 
+            this.disturbancePictureBox.Location = new System.Drawing.Point(83, 73);
+            this.disturbancePictureBox.Name = "disturbancePictureBox";
+            this.disturbancePictureBox.Size = new System.Drawing.Size(38, 37);
+            this.disturbancePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.disturbancePictureBox.TabIndex = 6;
+            this.disturbancePictureBox.TabStop = false;
+            // 
+            // disturbanceRadioBut
+            // 
+            this.disturbanceRadioBut.Location = new System.Drawing.Point(6, 73);
+            this.disturbanceRadioBut.Name = "disturbanceRadioBut";
+            this.disturbanceRadioBut.Size = new System.Drawing.Size(85, 38);
+            this.disturbanceRadioBut.TabIndex = 2;
+            this.disturbanceRadioBut.Text = "Disturbance Map";
+            this.disturbanceRadioBut.UseVisualStyleBackColor = true;
+            // 
             // bumpGroupBox
             // 
             this.bumpGroupBox.Controls.Add(this.bumpMapBut);
             this.bumpGroupBox.Controls.Add(this.bumpMapPictureBox);
             this.bumpGroupBox.Controls.Add(this.bumpMapRadioBut);
             this.bumpGroupBox.Controls.Add(this.constVectorRadioBut);
-            this.bumpGroupBox.Location = new System.Drawing.Point(12, 360);
+            this.bumpGroupBox.Location = new System.Drawing.Point(12, 513);
             this.bumpGroupBox.Name = "bumpGroupBox";
-            this.bumpGroupBox.Size = new System.Drawing.Size(187, 134);
+            this.bumpGroupBox.Size = new System.Drawing.Size(187, 122);
             this.bumpGroupBox.TabIndex = 2;
             this.bumpGroupBox.TabStop = false;
             this.bumpGroupBox.Text = "Bump Mapping";
@@ -159,9 +219,9 @@
             this.textureGroupBox.Controls.Add(this.constColorPictureBox);
             this.textureGroupBox.Controls.Add(this.textureRadioButton);
             this.textureGroupBox.Controls.Add(this.colorRadioButton);
-            this.textureGroupBox.Location = new System.Drawing.Point(12, 199);
+            this.textureGroupBox.Location = new System.Drawing.Point(12, 365);
             this.textureGroupBox.Name = "textureGroupBox";
-            this.textureGroupBox.Size = new System.Drawing.Size(187, 155);
+            this.textureGroupBox.Size = new System.Drawing.Size(187, 142);
             this.textureGroupBox.TabIndex = 1;
             this.textureGroupBox.TabStop = false;
             this.textureGroupBox.Text = "Texture";
@@ -226,6 +286,11 @@
             // 
             // Light
             // 
+            this.Light.Controls.Add(this.mPhongTrackBar);
+            this.Light.Controls.Add(this.label3);
+            this.Light.Controls.Add(this.label2);
+            this.Light.Controls.Add(this.lambertTrackBar);
+            this.Light.Controls.Add(this.phongTrackBar);
             this.Light.Controls.Add(this.circleLightRadioButton);
             this.Light.Controls.Add(this.constLightRadioButton);
             this.Light.Controls.Add(this.lightColorBut);
@@ -233,10 +298,31 @@
             this.Light.Controls.Add(this.label1);
             this.Light.Location = new System.Drawing.Point(12, 9);
             this.Light.Name = "Light";
-            this.Light.Size = new System.Drawing.Size(187, 184);
+            this.Light.Size = new System.Drawing.Size(187, 350);
             this.Light.TabIndex = 0;
             this.Light.TabStop = false;
             this.Light.Text = "Light";
+            // 
+            // circleLightRadioButton
+            // 
+            this.circleLightRadioButton.Checked = true;
+            this.circleLightRadioButton.Location = new System.Drawing.Point(9, 127);
+            this.circleLightRadioButton.Name = "circleLightRadioButton";
+            this.circleLightRadioButton.Size = new System.Drawing.Size(112, 38);
+            this.circleLightRadioButton.TabIndex = 4;
+            this.circleLightRadioButton.TabStop = true;
+            this.circleLightRadioButton.Text = "Light on the circle of radius 200";
+            this.circleLightRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // constLightRadioButton
+            // 
+            this.constLightRadioButton.Location = new System.Drawing.Point(9, 83);
+            this.constLightRadioButton.Name = "constLightRadioButton";
+            this.constLightRadioButton.Size = new System.Drawing.Size(94, 38);
+            this.constLightRadioButton.TabIndex = 3;
+            this.constLightRadioButton.Text = "Constant Vector (0,0,1)";
+            this.constLightRadioButton.UseVisualStyleBackColor = true;
+            this.constLightRadioButton.CheckedChanged += new System.EventHandler(this.constLightRadioButton_CheckedChanged);
             // 
             // lightColorBut
             // 
@@ -279,83 +365,55 @@
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
-            // constLightRadioButton
-            // 
-            this.constLightRadioButton.Location = new System.Drawing.Point(9, 83);
-            this.constLightRadioButton.Name = "constLightRadioButton";
-            this.constLightRadioButton.Size = new System.Drawing.Size(94, 38);
-            this.constLightRadioButton.TabIndex = 3;
-            this.constLightRadioButton.Text = "Constant Vector (0,0,1)";
-            this.constLightRadioButton.UseVisualStyleBackColor = true;
-            this.constLightRadioButton.CheckedChanged += new System.EventHandler(this.constLightRadioButton_CheckedChanged);
-            // 
-            // circleLightRadioButton
-            // 
-            this.circleLightRadioButton.Checked = true;
-            this.circleLightRadioButton.Location = new System.Drawing.Point(9, 127);
-            this.circleLightRadioButton.Name = "circleLightRadioButton";
-            this.circleLightRadioButton.Size = new System.Drawing.Size(112, 38);
-            this.circleLightRadioButton.TabIndex = 4;
-            this.circleLightRadioButton.TabStop = true;
-            this.circleLightRadioButton.Text = "Light on the circle of radius 200";
-            this.circleLightRadioButton.UseVisualStyleBackColor = true;
-            // 
             // refreshTimer
             // 
             this.refreshTimer.Enabled = true;
             this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
             // 
-            // disturbanceGroupBox
+            // phongTrackBar
             // 
-            this.disturbanceGroupBox.Controls.Add(this.noDisturbanceRadioBut);
-            this.disturbanceGroupBox.Controls.Add(this.disturbanceButton);
-            this.disturbanceGroupBox.Controls.Add(this.disturbancePictureBox);
-            this.disturbanceGroupBox.Controls.Add(this.disturbanceRadioBut);
-            this.disturbanceGroupBox.Location = new System.Drawing.Point(12, 500);
-            this.disturbanceGroupBox.Name = "disturbanceGroupBox";
-            this.disturbanceGroupBox.Size = new System.Drawing.Size(187, 139);
-            this.disturbanceGroupBox.TabIndex = 7;
-            this.disturbanceGroupBox.TabStop = false;
-            this.disturbanceGroupBox.Text = "Bump Mapping";
+            this.phongTrackBar.Location = new System.Drawing.Point(6, 252);
+            this.phongTrackBar.Maximum = 100;
+            this.phongTrackBar.Name = "phongTrackBar";
+            this.phongTrackBar.Size = new System.Drawing.Size(175, 45);
+            this.phongTrackBar.TabIndex = 5;
+            this.phongTrackBar.Scroll += new System.EventHandler(this.phongTrackBar_Scroll);
             // 
-            // disturbanceButton
+            // lambertTrackBar
             // 
-            this.disturbanceButton.Location = new System.Drawing.Point(128, 72);
-            this.disturbanceButton.Name = "disturbanceButton";
-            this.disturbanceButton.Size = new System.Drawing.Size(54, 38);
-            this.disturbanceButton.TabIndex = 6;
-            this.disturbanceButton.Text = "Set";
-            this.disturbanceButton.UseVisualStyleBackColor = true;
+            this.lambertTrackBar.Location = new System.Drawing.Point(6, 201);
+            this.lambertTrackBar.Maximum = 100;
+            this.lambertTrackBar.Name = "lambertTrackBar";
+            this.lambertTrackBar.Size = new System.Drawing.Size(175, 45);
+            this.lambertTrackBar.TabIndex = 6;
+            this.lambertTrackBar.Value = 100;
+            this.lambertTrackBar.Scroll += new System.EventHandler(this.lambertTrackBar_Scroll);
             // 
-            // disturbancePictureBox
+            // label2
             // 
-            this.disturbancePictureBox.Location = new System.Drawing.Point(83, 73);
-            this.disturbancePictureBox.Name = "disturbancePictureBox";
-            this.disturbancePictureBox.Size = new System.Drawing.Size(38, 37);
-            this.disturbancePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.disturbancePictureBox.TabIndex = 6;
-            this.disturbancePictureBox.TabStop = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 185);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(152, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Lambert and Phong ligth levels";
             // 
-            // disturbanceRadioBut
+            // label3
             // 
-            this.disturbanceRadioBut.Location = new System.Drawing.Point(6, 73);
-            this.disturbanceRadioBut.Name = "disturbanceRadioBut";
-            this.disturbanceRadioBut.Size = new System.Drawing.Size(85, 38);
-            this.disturbanceRadioBut.TabIndex = 2;
-            this.disturbanceRadioBut.Text = "Disturbance Map";
-            this.disturbanceRadioBut.UseVisualStyleBackColor = true;
+            this.label3.Location = new System.Drawing.Point(6, 300);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 37);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "M for Phong";
             // 
-            // noDisturbanceRadioBut
+            // mPhongTrackBar
             // 
-            this.noDisturbanceRadioBut.Checked = true;
-            this.noDisturbanceRadioBut.Location = new System.Drawing.Point(9, 29);
-            this.noDisturbanceRadioBut.Name = "noDisturbanceRadioBut";
-            this.noDisturbanceRadioBut.Size = new System.Drawing.Size(94, 38);
-            this.noDisturbanceRadioBut.TabIndex = 7;
-            this.noDisturbanceRadioBut.TabStop = true;
-            this.noDisturbanceRadioBut.Text = "No Disturbance";
-            this.noDisturbanceRadioBut.UseVisualStyleBackColor = true;
-            this.noDisturbanceRadioBut.CheckedChanged += new System.EventHandler(this.noDisturbanceRadioBut_CheckedChanged);
+            this.mPhongTrackBar.Location = new System.Drawing.Point(48, 303);
+            this.mPhongTrackBar.Maximum = 100;
+            this.mPhongTrackBar.Name = "mPhongTrackBar";
+            this.mPhongTrackBar.Size = new System.Drawing.Size(133, 45);
+            this.mPhongTrackBar.TabIndex = 9;
+            this.mPhongTrackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // MainWindow
             // 
@@ -370,16 +428,20 @@
             this.Text = "MainWindow";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.disturbanceGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.disturbancePictureBox)).EndInit();
             this.bumpGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bumpMapPictureBox)).EndInit();
             this.textureGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.texturePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.constColorPictureBox)).EndInit();
             this.Light.ResumeLayout(false);
+            this.Light.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightColorBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.disturbanceGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.disturbancePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phongTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lambertTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mPhongTrackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -413,6 +475,11 @@
         private System.Windows.Forms.Button disturbanceButton;
         internal System.Windows.Forms.PictureBox disturbancePictureBox;
         private System.Windows.Forms.RadioButton disturbanceRadioBut;
+        private System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.TrackBar phongTrackBar;
+        internal System.Windows.Forms.TrackBar lambertTrackBar;
+        internal System.Windows.Forms.TrackBar mPhongTrackBar;
+        private System.Windows.Forms.Label label3;
     }
 }
 

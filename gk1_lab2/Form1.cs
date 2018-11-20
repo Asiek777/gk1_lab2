@@ -121,7 +121,14 @@ namespace gk1_lab2
         {
             vec3 pix = GetPixelTextureColor(x, y);
             vec3 toLight = s.Lamp.normalizedVectorFrom(x, y);
-            double cosToLight = toLight * bumpMapVector(x, y);
+            double cosLambert = toLight * bumpMapVector(x, y);
+            cosLambert = cosLambert > 0 ? cosLambert : 0;
+            vec3 R = 2 * bumpMapVector(x, y) + (-1 * toLight);
+            R.normalizeVector();
+
+            double cosPhong = Math.Pow(new vec3(0, 0, 1) * R, s.M);
+            cosPhong = cosPhong > 0 ? cosPhong : 0;
+            double cosToLight = cosPhong * s.PhongLevel + cosLambert * s.LambertLevel;
             vec3 colorVec3 = new vec3(
                 s.Lamp.Color.x * pix.x * cosToLight,
                 s.Lamp.Color.y * pix.y * cosToLight,
@@ -268,5 +275,14 @@ namespace gk1_lab2
 
         private void noDisturbanceRadioBut_CheckedChanged(object sender, EventArgs e) => 
             pictureBox1.Refresh();
+
+        private void lambertTrackBar_Scroll(object sender, EventArgs e) => 
+            s.LambertLevel = (double)lambertTrackBar.Value / 100;
+
+        private void phongTrackBar_Scroll(object sender, EventArgs e) => 
+            s.PhongLevel = (double)phongTrackBar.Value / 100;
+
+        private void trackBar1_Scroll(object sender, EventArgs e) => 
+            s.M = mPhongTrackBar.Value;
     }
 }

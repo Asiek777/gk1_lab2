@@ -13,7 +13,8 @@ namespace gk1_lab2
         Lamp lamp = new Lamp(Color.White, new vec3(500, 400, 100));
         private vec3 textureColor;
         Bitmap texture, bumpMap, disturbMap;
-
+        double phongLevel = 0, lambertLevel = 1;
+        int m=1;
 
         public int PosX { get; set; }
         public int PosY { get; set; }
@@ -21,7 +22,22 @@ namespace gk1_lab2
         internal Triangle Triangle2 { get; set; }
         internal Triangle Triangle1 { get; set; }
         internal Vertex MovedVertex { get; set; }
+        public int M { get => m; set => m = value; }
         internal Lamp Lamp { get => lamp; set => lamp = value; }
+        public double PhongLevel { get => phongLevel; set
+            {
+                phongLevel = value;
+                if (lambertLevel + phongLevel > 1)
+                    LambertLevel = 1 - phongLevel;
+                parent.phongTrackBar.Value = (int)(100 * phongLevel);
+            } }
+        public double LambertLevel { get => lambertLevel; set
+            {
+                lambertLevel = value;
+                if (lambertLevel + phongLevel > 1)
+                    PhongLevel = 1 - lambertLevel;
+                parent.lambertTrackBar.Value = (int)(100 * lambertLevel);
+            } }
 
         public Bitmap BumpMap { get => bumpMap; set
             {
@@ -60,11 +76,8 @@ namespace gk1_lab2
         internal vec3[,] DisturbancePixels { get; set; }
         internal bool IsLightConst { get => Lamp.IsConst; set => Lamp.IsConst = value; }
 
-
         internal IEnumerable<Vertex> getVertices() => 
             Triangle1.Vertices.Concat(Triangle2.Vertices);
-
-
 
         public ProgramState(MainWindow parent)
         {
@@ -109,6 +122,10 @@ namespace gk1_lab2
                     BumpMapPixels[i, j] = bumpMap.GetPixel(i % bumpMap.Width, j % bumpMap.Height);
                     BumpMapPixels[i, j].convertToBumpMap();
                 }
+        }
+        void fillDisturbMapPixels(Bitmap disturbMap)
+        {
+
         }
     }
 }

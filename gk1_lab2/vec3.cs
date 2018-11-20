@@ -28,7 +28,7 @@ namespace gk1_lab2
         }
         double lenght() => 
             Math.Sqrt(x * x + y * y + z * z);
-        void normalizeVector()
+        internal void normalizeVector()
         {
             double len = lenght();
             x /= len;
@@ -56,6 +56,8 @@ namespace gk1_lab2
             new vec3(v.x * a, v.y * a, v.z * a);
         public static vec3 operator *(double a, vec3 v) =>
             new vec3(v.x * a, v.y * a, v.z * a);
+        public static vec3 operator +(vec3 v1, vec3 v2) =>
+            new vec3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 
         public static implicit operator vec3(Color color) => 
             new vec3(color);
